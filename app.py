@@ -18,8 +18,16 @@ def predict():
     Fuel_Type_Diesel=0
     if request.method == 'POST':
         Year = int(request.form['Year'])
-        Present_Price=float(request.form['Present_Price'])
-        Kms_Driven=int(request.form['Kms_Driven'])
+        if Year > 1980 and Year < 2022 :
+            Present_Price=float(request.form['Present_Price'])
+        else:
+             return render_template('home.html',prediction_text="Year not accepted! Enter range within 2021")
+        if (Present_Price < 200) and   (Present_Price > 0):
+                    
+            Kms_Driven=int(request.form['Kms_Driven'])
+        else:
+             
+            return render_template('home.html',prediction_text="Incorrect Price! Enter range of 1 lakh  to 200 lakhs")
          
         Owner=int(request.form['Owner'])
         Fuel_Type_Petrol=request.form['Fuel_Type_Petrol']
